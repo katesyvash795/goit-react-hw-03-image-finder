@@ -1,4 +1,3 @@
-import React from 'react';
 import { GalleryItem } from './ImageGalleryItem.style'; // Импортируйте ваш стайл-компонент
 
 const ImageGalleryItem = ({ image, onClick }) => {

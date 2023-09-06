@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import Modal from 'react-modal';
 import { ModalWrapper, ModalContent } from './Modal.styles';
 
@@ -31,7 +31,7 @@ class MyModal extends Component {
       >
         <ModalWrapper>
           <ModalContent>
-            <img src={imageURL} alt="Image" />
+            <img src={imageURL} />
             <button onClick={onClose}>Закрыть</button>
           </ModalContent>
         </ModalWrapper>

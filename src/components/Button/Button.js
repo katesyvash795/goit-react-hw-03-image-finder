@@ -1,4 +1,3 @@
-import React from 'react';
 import { LoadMoreButtonWrapper, Button, ButtonLabel } from './Button.style';
 
 const LoadMoreButton = ({ onClick, show }) => {

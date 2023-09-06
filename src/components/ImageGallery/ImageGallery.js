@@ -1,4 +1,3 @@
-import React from 'react';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import { List } from './ImageGallery.style';
 const ImageGallery = ({ images, onImageClick }) => {

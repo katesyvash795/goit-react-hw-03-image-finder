@@ -1,4 +1,3 @@
-import Reat from 'react';
 import { Audio } from 'react-loader-spinner';
 import { LoaderContainer, LoaderInner } from './Loader.style';
 
