@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const LoaderContainer = styled.div`
   position: fixed;
   left: 50%;
@@ -16,5 +15,5 @@ export const LoaderContainer = styled.div`
 `;
 
 export const LoaderInner = styled.div`
-  text-align: center; /* Выравниваем содержимое по центру */
+  text-align: center;
 `;

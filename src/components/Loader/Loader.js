@@ -1,6 +1,6 @@
 import Reat from 'react';
 import { Audio } from 'react-loader-spinner';
-import { LoaderContainer,LoaderInner } from './Loader.style';
+import { LoaderContainer, LoaderInner } from './Loader.style';
 
 const CustomLoader = () => {
   return (

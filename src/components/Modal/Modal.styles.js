@@ -24,11 +24,11 @@ export const ModalContent = styled.div`
   }
 
   button {
-    background-color: #007BFF;
+    background-color: #007bff;
     color: white;
     border: none;
-    display: block; /* Сделать кнопку блочным элементом, чтобы она занимала всю ширину контейнера */
-margin: 0 auto;
+    display: block;
+    margin: 0 auto;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;

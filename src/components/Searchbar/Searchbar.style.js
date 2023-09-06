@@ -1,8 +1,7 @@
-// SearchbarStyles.js
 import styled from 'styled-components';
 
 export const SearchbarWrapper = styled.header`
-  background-color: #007BFF;
+  background-color: #007bff;
   padding: 20px 0;
 `;
 
@@ -14,7 +13,7 @@ export const Form = styled.form`
 
 export const Button = styled.button`
   background-color: #fff;
-  color: #007BFF;
+  color: #007bff;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;

@@ -1,8 +1,6 @@
-// MyModal.js
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import { ModalWrapper, ModalContent} from './Modal.styles';
-import Button from 'components/Button/Button';
+import { ModalWrapper, ModalContent } from './Modal.styles';
 
 class MyModal extends Component {
   render() {
