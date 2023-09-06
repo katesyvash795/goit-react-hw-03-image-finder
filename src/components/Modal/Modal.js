@@ -31,7 +31,7 @@ class MyModal extends Component {
       >
         <ModalWrapper>
           <ModalContent>
-            <img src={imageURL} />
+            <img src={imageURL} alt="image"/>
             <button onClick={onClose}>Закрыть</button>
           </ModalContent>
         </ModalWrapper>
