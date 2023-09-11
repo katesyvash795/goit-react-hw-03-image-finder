@@ -1,12 +1,10 @@
 import { Component } from 'react';
-
+import { fetchImages } from './api';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
 import Loader from './Loader/Loader';
-
-import axios from 'axios';
 
 class App extends Component {
   state = {
@@ -17,31 +15,32 @@ class App extends Component {
     page: 1,
     isLoading: false,
     selectedImageURL: '',
+    loader: false,
+    totalHits: 0, // Добавляем totalHits в начальное состояние
   };
 
-  BASE_URL = 'https://pixabay.com/api/';
-  API_KEY = '38424207-c86d4b463b0395cac7359a6bf';
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
+      this.setState({ loader: true });
+      try {
+        const data = await fetchImages(this.state.query, this.state.page);
+        const { hits, totalHits } = data; // Извлекаем hits и totalHits из ответа API
+        this.setState((prevState) => {
+          return {
+            images: [...prevState.images, ...hits],
+            totalHits, // Обновляем totalHits
+          };
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.setState({ loader: false });
+      }
+    }
+  }
 
-  fetchImages = () => {
-    const { query, page } = this.state;
-    const URL = `${this.BASE_URL}?q=${query}&page=${page}&key=${this.API_KEY}&image_type=photo&orientation=horizontal&per_page=12`;
-
-    this.setState({ isLoading: true });
-
-    axios
-      .get(URL)
-      .then(response => {
-        this.setState(prevState => ({
-          images: [...prevState.images, ...response.data.hits],
-          page: prevState.page + 1,
-        }));
-      })
-      .catch(error => console.error('Error fetching data:', error))
-      .finally(() => this.setState({ isLoading: false }));
-  };
-
-  handleSearchInputChange = query => {
-    this.setState({ query, images: [], page: 1 }, this.fetchImages);
+  handleSearchInputChange = (query) => {
+    this.setState({ query, images: [], page: 1 });
   };
 
   handleCloseModal = () => {
@@ -49,23 +48,29 @@ class App extends Component {
   };
 
   loadMoreImages = () => {
-    this.fetchImages();
+    this.setState((prevState) => ({
+      page: prevState.page + 1,
+    }));
   };
-  handleImageClick = image => {
+  
+
+  handleImageClick = (image) => {
     this.setState({ showModal: true, selectedImageURL: image.largeImageURL });
   };
 
   render() {
-    const { images, showModal, selectedImageURL, isLoading } = this.state;
+    const { images, showModal, selectedImageURL, isLoading, loader, totalHits } = this.state;
 
     return (
       <div className="App">
         <Searchbar onSubmit={this.handleSearchInputChange} />
         <ImageGallery images={images} onImageClick={this.handleImageClick} />
-        {isLoading && <Loader />}
-        {images.length > 0 && (
-          <Button onClick={this.loadMoreImages} show={!isLoading} />
-        )}
+        {loader && <Loader />}
+        {images.length > 0 && images.length < totalHits && (
+  <Button onClick={this.loadMoreImages} show={!isLoading} />
+)}
+
+
         {showModal && selectedImageURL && (
           <Modal
             isOpen={showModal}
